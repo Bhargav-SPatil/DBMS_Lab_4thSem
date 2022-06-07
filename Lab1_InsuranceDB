@@ -1,0 +1,46 @@
+create database Insurance_;
+use Insurance_;
+create table Person
+(
+driverID varchar(5), 
+Name varchar(30), 
+Address varchar(255)
+);
+Alter table Person Add Primary Key (driverID);
+
+create table Car
+(
+RegNo varchar(10),
+Model varchar(20),
+Year int,
+Primary Key (RegNo)
+);
+
+Create table Accident
+(
+ReportNumber int,
+date date,
+location varchar(255),
+Primary Key (ReportNumber)
+);
+
+Create table Owns
+(
+driverID varchar(5),
+RegNo varchar(10),
+Foreign Key (driverID) References Person(driverID),
+Foreign Key (RegNo) References Car(RegNo),
+Primary Key (driverID, RegNo)
+);
+
+Create table Participated
+(
+driverID varchar(5),
+RegNo varchar(10),
+ReportNumber int,
+DamageAmount int,
+Foreign Key (driverID) References Person(driverID),
+Foreign Key (RegNo) References Car(RegNo),
+Foreign Key (ReportNumber) References Accident(ReportNumber),
+Primary Key (driverID, RegNo, ReportNumber)
+);
