@@ -44,3 +44,57 @@ Foreign Key (RegNo) References Car(RegNo),
 Foreign Key (ReportNumber) References Accident(ReportNumber),
 Primary Key (driverID, RegNo, ReportNumber)
 );
+
+Insert into person values( 'A01', 'Richard', 'Srinivas Nagar');
+Insert into person values( 'A02', 'Pradeep', 'Rajaji Nagar');
+Insert into person values( 'A03', 'Smith', 'Ashok Nagar');
+Insert into person values( 'A04', 'Vecna', 'Lonavala');
+Insert into person values( 'A05', 'John', 'N R Colony');
+
+Select * from person;
+
+Insert into Car values('KA052250', 'Indica', 1990);
+Insert into Car values('KA031181', 'Lancer', 1957);
+Insert into Car values('KA095477', 'Toyota', 1998);
+Insert into Car values('KA053408', 'Honda', 2008);
+Insert into Car values('KA041702', 'Audi', 2005);
+
+Select * from car;
+
+
+Insert into owns values
+('A01', 'KA052250'), 
+('A02', 'KA053408'), 
+('A03', 'KA031181'), 
+('A04', 'KA095477'),
+('A05', 'KA041702');
+
+Select * from owns Order By driverID;
+
+ALTER TABLE Accident MODIFY date char(10);
+
+Insert into accident values
+(11, '01-JAN-03', 'Mysore Road'),
+(12, '02-FEB-04', 'South end Circle'),
+(13, '21-JAN-03', 'Bull temple Road'),
+(14, '17-FEB-08', 'Mysore Road'),
+(15, '04-Mar-05', 'Kanakpura Raod');
+
+Select * from accident;
+
+Insert into Participated values
+('A01', 'KA052250', 11, 10000),
+('A02', 'KA053408', 12, 50000),
+('A03', 'KA095477', 13, 25000),
+('A04', 'KA031181', 14, 3000),
+('A05', 'KA041702', 15, 3000);
+
+Select * from participated;
+
+Update participated Set DamageAmount = 25000 Where ReportNumber = 12;
+
+Insert into accident values(16, '02-Jun-07', 'South end Circle');
+
+Select count(*) from accident where date like '_______08';
+
+Select count(*) from participated, car where car.Model = 'Indica' AND participated.RegNO = car.RegNo;
