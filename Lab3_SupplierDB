@@ -1,0 +1,63 @@
+create database supplier029;
+
+use supplier029;
+
+create table suppliers(
+sid int,
+sname varchar(30),
+address varchar(255)
+);
+
+Alter table suppliers ADD primary key (sid);
+
+create table parts(
+pid int,
+pname varchar(30),
+color varchar(20)
+);
+
+Alter table parts ADD primary key (pid);
+
+create table catalog(
+sid int,
+pid int,
+cost real,
+foreign key (sid) references suppliers (sid),
+foreign key (pid) references parts (pid),
+primary key (sid, pid)
+);
+
+INSERT INTO SUPPLIERS(SID, SNAME, ADDRESS) VALUES
+(1001, 'CLASSMATE', 'MUMBAI'),
+(1002, 'FLAIR', 'DELHI'),
+(1003, 'DELL', 'BANGALORE'),
+(1004, 'DOMZ', 'KOLKATTA'),
+(1005, 'SAMSUNG', 'BANGALORE');
+SELECT * FROM SUPPLIERS;
+
+INSERT INTO PARTS(PID, PNAME, COLOR) VALUES
+(2001, 'BOOK', 'WHITE'),
+(2002, 'PEN', 'BLACK'),
+(2003, 'LAPTOP','SILVER'),
+(2004, 'PENCIL', 'RED'),
+(2005, 'MOBILE', 'GREEN');
+SELECT * FROM PARTS;
+INSERT INTO PARTS(PID, PNAME, COLOR) VALUES
+(2006, 'CHARGER', 'WHITE'),
+    (2007, 'IPAD', 'BLACK'),
+    (2008, 'ERASER', 'BLUE'),
+    (2009, 'SCALE', 'WHITE');
+
+INSERT INTO CATALOG(SID, PID, COST) VALUES
+(1001, 2001, 40),
+    (1002, 2002, 20),
+    (1002, 2009, 5),
+    (1003, 2003, 35000),
+    (1003, 2007, 18000),
+    (1004, 2004, 10),
+    (1004, 2008, 5),
+    (1005, 2005, 10000),
+    (1005, 2006, 500);
+SELECT * FROM CATALOG;
+
+select distinct pname from parts, catalog where parts.pid = catalog.pid;
